@@ -1,0 +1,6 @@
+roboflow
+python-dotenv
+torch
+albumentations
+segmentation_models_pytorch
+ipykernel

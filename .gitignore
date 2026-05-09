@@ -1,0 +1,8 @@
+.venv/
+.env
+
+Glenda-1/
+
+src/__pycache__
+
+outputs
