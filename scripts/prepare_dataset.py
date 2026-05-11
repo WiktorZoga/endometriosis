@@ -1,9 +1,14 @@
 import os
+import sys
 import json
 import numpy as np
 import cv2
 from dotenv import load_dotenv
 from roboflow import Roboflow
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from src import config
 
 def convert_coco_to_masks(split_folder):
     """Converts _annotations.coco.json to binary masks PNG."""
@@ -28,7 +33,7 @@ def convert_coco_to_masks(split_folder):
 
         for ann in annotations_by_image[img_id]:
             for seg in ann['segmentation']:
-                if len(seg) >= 6: # Musi być min 3 punkty (x,y), żeby był trójkąt
+                if len(seg) >= 6: # at least 3 points (x,y), for triangle
                     poly = np.array(seg).reshape((int(len(seg)/2), 2)).astype(np.int32)
                     cv2.fillPoly(mask, [poly], 255)
 
@@ -58,6 +63,9 @@ print(f"Data downloaded to: {dataset.location}")
 print("\n2. Converting COCO adnotations to PNG binary masks ...")
 
 dataset_path = dataset.location 
+
+if not os.path.exists(config.OUTPUT_DIR):
+    os.mkdir(config.OUTPUT_DIR)
 
 for split in ["train", "valid", "test"]:
     split_dir = os.path.join(dataset_path, split)

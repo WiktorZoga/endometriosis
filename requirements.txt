@@ -1,6 +1,10 @@
 roboflow
 python-dotenv
 torch
+numpy
+matplotlib
+iprogress
 albumentations
 segmentation_models_pytorch
 ipykernel
+monai

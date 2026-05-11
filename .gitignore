@@ -3,6 +3,8 @@
 
 Glenda-1/
 
-src/__pycache__
+*/__pycache__
 
 outputs
+
+*.pth
